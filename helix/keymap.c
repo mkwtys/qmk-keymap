@@ -5,7 +5,7 @@
 #include "split_util.h"
 #endif
 #ifdef SSD1306OLED
-  #include "ssd1306.h"
+#include "ssd1306.h"
 #endif
 
 extern keymap_config_t keymap_config;
@@ -22,10 +22,10 @@ extern uint8_t is_master;
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
 enum layer_number {
-    _QWERTY = 0,
-    _LOWER,
-    _RAISE,
-    _ADJUST
+  _QWERTY = 0,
+  _LOWER,
+  _RAISE,
+  _ADJUST
 };
 
 enum custom_keycodes {
@@ -43,7 +43,6 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
-
 // Fillers to make layering more clear
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -52,7 +51,6 @@ enum macro_keycodes {
 
 #if HELIX_ROWS == 5
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
   /* Qwerty
    * ,-----------------------------------------.             ,-----------------------------------------.
    * |   `  |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  | Del  |
@@ -170,8 +168,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case LOWER:
       if (record->event.pressed) {
-          //not sure how to have keyboard check mode and set it to a variable, so my work around
-          //uses another variable that would be set to true after the first time a reactive key is pressed.
+        //not sure how to have keyboard check mode and set it to a variable, so my work around
+        //uses another variable that would be set to true after the first time a reactive key is pressed.
         if (TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
         } else {
           TOG_STATUS = !TOG_STATUS;
@@ -223,9 +221,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case EISU:
       if (record->event.pressed) {
-        if(keymap_config.swap_lalt_lgui==false){
+        if (keymap_config.swap_lalt_lgui == false) {
           register_code(KC_LANG2);
-        }else{
+        } else {
           SEND_STRING(SS_LALT("`"));
         }
       } else {
@@ -235,9 +233,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case KANA:
       if (record->event.pressed) {
-        if(keymap_config.swap_lalt_lgui==false){
+        if (keymap_config.swap_lalt_lgui == false) {
           register_code(KC_LANG1);
-        }else{
+        } else {
           SEND_STRING(SS_LALT("`"));
         }
       } else {
@@ -259,24 +257,23 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 void matrix_init_user(void) {
-    #ifdef RGBLIGHT_ENABLE
-      RGB_current_mode = rgblight_config.mode;
-    #endif
-    //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
-    #ifdef SSD1306OLED
-        iota_gfx_init(!has_usb());   // turns on the display
-    #endif
+  #ifdef RGBLIGHT_ENABLE
+    RGB_current_mode = rgblight_config.mode;
+  #endif
+  //SSD1306 OLED init, make sure to add #define SSD1306OLED in config.h
+  #ifdef SSD1306OLED
+    iota_gfx_init(!has_usb());   // turns on the display
+  #endif
 }
 
 //SSD1306 OLED update loop, make sure to add #define SSD1306OLED in config.h
 #ifdef SSD1306OLED
 
 void matrix_scan_user(void) {
-    iota_gfx_task();  // this is what updates the display continuously
+  iota_gfx_task();  // this is what updates the display continuously
 }
 
-void matrix_update(struct CharacterMatrix *dest,
-                          const struct CharacterMatrix *source) {
+void matrix_update(struct CharacterMatrix *dest, const struct CharacterMatrix *source) {
   if (memcmp(dest->display, source->display, sizeof(dest->display))) {
     memcpy(dest->display, source->display, sizeof(dest->display));
     dest->dirty = true;
@@ -291,8 +288,7 @@ void matrix_update(struct CharacterMatrix *dest,
 #define L_ADJUST_TRI (L_ADJUST|L_RAISE|L_LOWER)
 
 static void render_logo(struct CharacterMatrix *matrix) {
-
-  static char logo[]={
+  static char logo[] = {
     0x80,0x81,0x82,0x83,0x84,0x85,0x86,0x87,0x88,0x89,0x8a,0x8b,0x8c,0x8d,0x8e,0x8f,0x90,0x91,0x92,0x93,0x94,
     0xa0,0xa1,0xa2,0xa3,0xa4,0xa5,0xa6,0xa7,0xa8,0xa9,0xaa,0xab,0xac,0xad,0xae,0xaf,0xb0,0xb1,0xb2,0xb3,0xb4,
     0xc0,0xc1,0xc2,0xc3,0xc4,0xc5,0xc6,0xc7,0xc8,0xc9,0xca,0xcb,0xcc,0xcd,0xce,0xcf,0xd0,0xd1,0xd2,0xd3,0xd4,
@@ -301,17 +297,14 @@ static void render_logo(struct CharacterMatrix *matrix) {
   //matrix_write_P(&matrix, PSTR(" Split keyboard kit"));
 }
 
-
-
 void render_status(struct CharacterMatrix *matrix) {
-
   // Render to mode icon
-  static char logo[][2][3]={{{0x95,0x96,0},{0xb5,0xb6,0}},{{0x97,0x98,0},{0xb7,0xb8,0}}};
-  if(keymap_config.swap_lalt_lgui==false){
+  static char logo[][2][3] = {{{0x95,0x96,0},{0xb5,0xb6,0}},{{0x97,0x98,0},{0xb7,0xb8,0}}};
+  if (keymap_config.swap_lalt_lgui == false) {
     matrix_write(matrix, logo[0][0]);
     matrix_write_P(matrix, PSTR("\n"));
     matrix_write(matrix, logo[0][1]);
-  }else{
+  } else {
     matrix_write(matrix, logo[1][0]);
     matrix_write_P(matrix, PSTR("\n"));
     matrix_write(matrix, logo[1][1]);
@@ -321,47 +314,46 @@ void render_status(struct CharacterMatrix *matrix) {
   char buf[40];
   snprintf(buf,sizeof(buf), "Undef-%ld", layer_state);
   matrix_write_P(matrix, PSTR("\nLayer: "));
-    switch (layer_state) {
-        case L_BASE:
-           matrix_write_P(matrix, PSTR("Default"));
-           break;
-        case L_RAISE:
-           matrix_write_P(matrix, PSTR("Raise"));
-           break;
-        case L_LOWER:
-           matrix_write_P(matrix, PSTR("Lower"));
-           break;
-        case L_ADJUST:
-        case L_ADJUST_TRI:
-           matrix_write_P(matrix, PSTR("Adjust"));
-           break;
-        default:
-           matrix_write(matrix, buf);
-    }
+  switch (layer_state) {
+    case L_BASE:
+      matrix_write_P(matrix, PSTR("Default"));
+      break;
+    case L_RAISE:
+      matrix_write_P(matrix, PSTR("Raise"));
+      break;
+   case L_LOWER:
+      matrix_write_P(matrix, PSTR("Lower"));
+      break;
+    case L_ADJUST:
+   case L_ADJUST_TRI:
+      matrix_write_P(matrix, PSTR("Adjust"));
+      break;
+   default:
+      matrix_write(matrix, buf);
+  }
 
   // Host Keyboard LED Status
   char led[40];
-    snprintf(led, sizeof(led), "\n%s  %s  %s",
-            (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) ? "NUMLOCK" : "       ",
-            (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) ? "CAPS" : "    ",
-            (host_keyboard_leds() & (1<<USB_LED_SCROLL_LOCK)) ? "SCLK" : "    ");
+  snprintf(led, sizeof(led), "\n%s  %s  %s",
+          (host_keyboard_leds() & (1<<USB_LED_NUM_LOCK)) ? "NUMLOCK" : "       ",
+          (host_keyboard_leds() & (1<<USB_LED_CAPS_LOCK)) ? "CAPS" : "    ",
+          (host_keyboard_leds() & (1<<USB_LED_SCROLL_LOCK)) ? "SCLK" : "    ");
   matrix_write(matrix, led);
 }
-
 
 void iota_gfx_task_user(void) {
   struct CharacterMatrix matrix;
 
-#if DEBUG_TO_SCREEN
-  if (debug_enable) {
-    return;
-  }
-#endif
+  #if DEBUG_TO_SCREEN
+    if (debug_enable) {
+      return;
+    }
+  #endif
 
   matrix_clear(&matrix);
-  if(is_master){
+  if (is_master) {
     render_status(&matrix);
-  }else{
+  } else {
     render_logo(&matrix);
   }
   matrix_update(&display, &matrix);
