@@ -87,23 +87,23 @@ else
 endif
 
 ifeq ($(strip $(IOS_DEVICE_ENABLE)), yes)
-    OPT_DEFS += -DIOS_DEVICE_ENABLE
+  OPT_DEFS += -DIOS_DEVICE_ENABLE
 endif
 
 ifeq ($(strip $(LED_ANIMATIONS)), yes)
-    OPT_DEFS += -DRGBLIGHT_ANIMATIONS
+  OPT_DEFS += -DRGBLIGHT_ANIMATIONS
 endif
 
 ifeq ($(strip $(OLED_ENABLE)), yes)
-    OPT_DEFS += -DOLED_ENABLE
+  OPT_DEFS += -DOLED_ENABLE
 endif
 
 ifeq ($(strip $(LOCAL_GLCDFONT)), yes)
-    OPT_DEFS += -DLOCAL_GLCDFONT
+  OPT_DEFS += -DLOCAL_GLCDFONT
 endif
 
 ifeq ($(strip $(Link_Time_Optimization)),yes)
-    EXTRAFLAGS += -flto -DUSE_Link_Time_Optimization
+  EXTRAFLAGS += -flto -DUSE_Link_Time_Optimization
 endif
 
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE

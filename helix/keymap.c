@@ -182,13 +182,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
       break;
     case ADJUST:
-        if (record->event.pressed) {
-          layer_on(_ADJUST);
-        } else {
-          layer_off(_ADJUST);
-        }
-        return false;
-        break;
+      if (record->event.pressed) {
+        layer_on(_ADJUST);
+      } else {
+        layer_off(_ADJUST);
+      }
+      return false;
+      break;
     //led operations - RGB mode change now updates the RGB_current_mode to allow the right RGB mode to be set after reactive keys are released
     case RGB_MOD:
       #ifdef RGBLIGHT_ENABLE
@@ -301,14 +301,14 @@ void render_status(struct CharacterMatrix *matrix) {
     case L_RAISE:
       matrix_write_P(matrix, PSTR("Raise"));
       break;
-   case L_LOWER:
+    case L_LOWER:
       matrix_write_P(matrix, PSTR("Lower"));
       break;
     case L_ADJUST:
-   case L_ADJUST_TRI:
+    case L_ADJUST_TRI:
       matrix_write_P(matrix, PSTR("Adjust"));
       break;
-   default:
+    default:
       matrix_write(matrix, buf);
   }
 
