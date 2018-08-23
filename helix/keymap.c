@@ -159,12 +159,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           TOG_STATUS = !TOG_STATUS;
         }
         layer_on(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         TOG_STATUS = false;
         layer_off(_LOWER);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
+      update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       return false;
       break;
     case RAISE:
@@ -175,12 +174,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           TOG_STATUS = !TOG_STATUS;
         }
         layer_on(_RAISE);
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       } else {
         layer_off(_RAISE);
         TOG_STATUS = false;
-        update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       }
+      update_tri_layer_RGB(_LOWER, _RAISE, _ADJUST);
       return false;
       break;
     case ADJUST:
