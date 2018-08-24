@@ -39,35 +39,6 @@ Link_Time_Optimization = no # if firmware size over limit, try this option
 ####  LED_BACK_ENABLE and LED_UNDERGLOW_ENABLE.
 ####    Do not enable these with audio at the same time.
 
-### Helix keyboard 'default' keymap: convenient command line option
-##    make HELIX=<options> helix:defualt
-##    option= oled | back | under | na | ios
-##    ex.
-##      make HELIX=oled          helix:defualt
-##      make HELIX=oled,back     helix:defualt
-##      make HELIX=oled,under    helix:defualt
-##      make HELIX=oled,back,na  helix:defualt
-##      make HELIX=oled,back,ios helix:defualt
-##
-ifneq ($(strip $(HELIX)),)
-  ifeq ($(findstring oled,$(HELIX)), oled)
-    OLED_ENABLE = yes
-  endif
-  ifeq ($(findstring back,$(HELIX)), back)
-    LED_BACK_ENABLE = yes
-  else ifeq ($(findstring under,$(HELIX)), under)
-    LED_UNDERGLOW_ENABLE = yes
-  endif
-  ifeq ($(findstring na,$(HELIX)), na)
-    LED_ANIMATIONS = no
-  endif
-  ifeq ($(findstring ios,$(HELIX)), ios)
-    IOS_DEVICE_ENABLE = yes
-  endif
-  $(eval $(call HELIX_CUSTOMISE_MSG))
-  $(info )
-endif
-
 # Uncomment these for checking
 #   jp: コンパイル時にカスタマイズの状態を表示したい時はコメントをはずします。
 # $(eval $(call HELIX_CUSTOMISE_MSG))
