@@ -29,66 +29,69 @@ enum macro_keycodes {
   KC_SAMPLEMACRO,
 };
 
-#define KC_XXXXX KC_NO
-#define KC_LOWER LOWER
-#define KC_RAISE RAISE
-#define KC_RST   RESET
-#define KC_LRST  RGBRST
-#define KC_LTOG  RGB_TOG
-#define KC_LHUI  RGB_HUI
-#define KC_LHUD  RGB_HUD
-#define KC_LSAI  RGB_SAI
-#define KC_LSAD  RGB_SAD
-#define KC_LVAI  RGB_VAI
-#define KC_LVAD  RGB_VAD
-#define KC_LMOD  RGB_MOD
 #define KC_GUIEI GUI_T(KC_LANG2)
 #define KC_ALTKN ALT_T(KC_LANG1)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_QWERTY] = LAYOUT_kc( \
-  //,-----------------------------------------.                ,-----------------------------------------.
-        TAB,     Q,     W,     E,     R,     T,                      Y,     U,     I,     O,    P,   BSPC,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LCTL,     A,     S,     D,     F,     G,                      H,     J,     K,     L,  SCLN,  QUOT,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT,     Z,     X,     C,     V,     B,                      N,     M,  COMM,   DOT,  SLSH,  RSFT,\
-  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
-                              //`--------------------'  `--------------------'
+  // ,-----------------------------------------.                ,-----------------------------------------.
+  // |  tab |    q |    w |    e |    r |    t |                |    y |    u |    i |    o |    p | bksp |
+  // |------+------+------+------+------+------|                |------+------+------+------+------+------|
+  // | ctrl |    a |    s |    d |    f |    g |                |    h |    j |    k |    l |    ; |    ' |
+  // |------+------+------+------+------+------+                +------+------+------+------+------+------|
+  // | shift|    z |    x |    c |    v |    b |                |    n |    m |    , |    . |    / | shift|
+  // `---------------------------+------+------+------.  ,------+-----------------------------------------'
+  //                             |gui/ei| lower| space|  | enter| raise|alt/kn|
+  //                             `--------------------'  '--------------------'
+  [_QWERTY] = LAYOUT( \
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,\
+    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT,\
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                      KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,\
+                                        KC_GUIEI,LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_ALTKN \
   ),
-  [_LOWER] = LAYOUT_kc( \
-  //,-----------------------------------------.                ,-----------------------------------------.
-        ESC,     1,     2,     3,     4,     5,                      6,     7,     8,     9,    0,   BSPC,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LCTL, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   LEFT,  DOWN,    UP, RIGHT, XXXXX, XXXXX,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
-  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
-                              //`--------------------'  `--------------------'
+  // ,-----------------------------------------.                ,-----------------------------------------.
+  // |  esc |    1 |    2 |    3 |    4 |    5 |                |    6 |    7 |    8 |    9 |    0 | bksp |
+  // |------+------+------+------+------+------|                |------+------+------+------+------+------|
+  // | ctrl |      |      |      |      |      |                | left | down |   up | right|      |      |
+  // |------+------+------+------+------+------+                +------+------+------+------+------+------|
+  // | shift|      |      |      |      |      |                |      |      |      |      |      |      |
+  // `---------------------------+------+------+------.  ,------+-----------------------------------------'
+  //                             |gui/ei| lower| space|  | enter| raise|alt/kn|
+  //                             `--------------------'  '--------------------'
+  [_LOWER] = LAYOUT( \
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,\
+    KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,XXXXXXX, XXXXXXX,\
+    KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+                                        KC_GUIEI,LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_ALTKN \
   ),
-  [_RAISE] = LAYOUT_kc( \
-  //,-----------------------------------------.                ,-----------------------------------------.
-        ESC,  EXLM,    AT,  HASH,   DLR,  PERC,                   CIRC,  AMPR,  ASTR,  LPRN,  RPRN,  BSPC,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LCTL, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   MINS,   EQL,  LCBR,  RCBR,  PIPE,   GRV,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LSFT, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,                   UNDS,  PLUS,  LBRC,  RBRC,  BSLS,  TILD,\
-  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
-                              //`--------------------'  `--------------------'
+  // ,-----------------------------------------.                ,-----------------------------------------.
+  // |   esc|    ! |    @ |    # |    $ |    % |                |    ^ |    & |    * |    ( |    ) | bksp |
+  // |------+------+------+------+------+------|                |------+------+------+------+------+------|
+  // |  ctrl|      |      |      |      |      |                |    - |    = |    { |    } |    | |    ` |
+  // |------+------+------+------+------+------+                +------+------+------+------+------+------|
+  // | shift|      |      |      |      |      |                |    _ |    + |    [ |    ] |    \ |    ~ |
+  // `---------------------------+------+------+------.  ,------+-----------------------------------------'
+  //                             |gui/ei| lower| space|  | enter| raise|alt/kn|
+  //                             `--------------------'  '--------------------'
+  [_RAISE] = LAYOUT( \
+    KC_ESC,  KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,                   KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,\
+    KC_LCTL, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_MINS, KC_EQL,  KC_LCBR, KC_RCBR, KC_PIPE, KC_GRV,\
+    KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_BSLS, KC_TILD,\
+                                        KC_GUIEI,LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_ALTKN \
   ),
-  [_ADJUST] = LAYOUT_kc( \
-  //,-----------------------------------------.                ,-----------------------------------------.
-        RST,  LRST, XXXXX, XXXXX, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LTOG,  LHUI,  LSAI,  LVAI, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
-  //|------+------+------+------+------+------|                |------+------+------+------+------+------|
-       LMOD,  LHUD,  LSAD,  LVAD, XXXXX, XXXXX,                  XXXXX, XXXXX, XXXXX, XXXXX, XXXXX, XXXXX,\
-  //|------+------+------+------+------+------+------|  |------+------+------+------+------+------+------|
-                                  GUIEI, LOWER,   SPC,      ENT, RAISE, ALTKN \
-                              //`--------------------'  `--------------------'
+  // ,-----------------------------------------.                ,-----------------------------------------.
+  // | reset|rgbrst|      |      |      |      |                |      |      |      |      |      |      |
+  // |------+------+------+------+------+------|                |------+------+------+------+------+------|
+  // |rbg on| hue+ | sai+ | val+ |      |      |                |      |      |      |      |      |      |
+  // |------+------+------+------+------+------+                +------+------+------+------+------+------|
+  // | mode | hue- | sai- | val- |      |      |                |      |      |      |      |      |      |
+  // `---------------------------+------+------+------.  ,------+-----------------------------------------'
+  //                             |gui/ei| lower| space|  | enter| raise|alt/kn|
+  //                             `--------------------'  '--------------------'
+  [_ADJUST] = LAYOUT( \
+    RESET,   RGBRST,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+    RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+    RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX,                   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,\
+                                        KC_GUIEI,LOWER,   KC_SPC,  KC_ENT,  RAISE,   KC_ALTKN \
   )
 };
 
@@ -140,7 +143,7 @@ void matrix_render_user(struct CharacterMatrix *matrix) {
     // If you want to change the display of OLED, you need to change here
     matrix_write_ln(matrix, read_layer_state());
     matrix_write_ln(matrix, read_keylog());
-    // matrix_write_ln(matrix, read_keylogs());
+    matrix_write_ln(matrix, read_keylogs());
     // matrix_write_ln(matrix, read_mode_icon(keymap_config.swap_lalt_lgui));
     // matrix_write_ln(matrix, read_host_led_state());
     // matrix_write_ln(matrix, read_timelog());
